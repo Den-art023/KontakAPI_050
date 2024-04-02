@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:data_kontak/controller/kontak_controller.dart';
+import 'package:data_kontak/model/kontak.dart';
+import 'package:data_kontak/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -45,40 +48,40 @@ class _FormKontakState extends State<FormKontak> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: TextFormField(
                 controller: _namaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Nama",
                   hintText: "Masukkan Nama Anda",
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "email",
                   hintText: "Masukkan Email Anda",
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: TextFormField(
                 controller: _alamatController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Alamat",
                   hintText: "Masukkan Alamat Anda",
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: TextFormField(
                 controller: _noTeleponController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Nomor Telepon",
                   hintText: "Masukkan Nomor Telepon Anda",
                 ),
@@ -93,15 +96,34 @@ class _FormKontakState extends State<FormKontak> {
             ),
             Container(
               margin: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formkey.currentState!.validate()) {
+                    var result = await KontakController().addPerson(
+                        Kontak(
+                            nama: _namaController.text,
+                            email: _emailController.text,
+                            alamat: _alamatController.text,
+                            telepon: _noTeleponController.text,
+                            foto: _image!.path),
+                        _image);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          result['message'],
+                        ),
+                      ),
+                    );
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeView()),
+                        (route) => false);
+                  }
+                },
+                child: const Text("Simpan"),
+              ),
             ),
-            SizedBox(
-              height: 100,
-            ),
-            ElevatedButton(onPressed: () {}, child: Text("Pilih Gambar")),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(onPressed: () {}, child: Text("Submit")),
-            )
           ],
         ),
       ),
