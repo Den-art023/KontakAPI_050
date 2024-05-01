@@ -16,7 +16,7 @@ class KontakService {
       getUri(endpoint),
     )
       ..fields.addAll(data)
-      ..headers['Content-Type'] = 'app;ication/json';
+      ..headers['Content-Type'] = 'application/json';
 
     if (file != null) {
       request.files.add(await http.MultipartFile.fromPath('gambar', file.path));

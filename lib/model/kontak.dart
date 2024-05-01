@@ -35,8 +35,8 @@ class Kontak {
       'nama': nama,
       'email': email,
       'alamat': alamat,
-      'telepon': telepon,
-      'foto': foto,
+      'no_telp': telepon,
+      'pic': foto,
     };
   }
 
@@ -45,8 +45,8 @@ class Kontak {
       nama: map['nama'] as String,
       email: map['email'] as String,
       alamat: map['alamat'] as String,
-      telepon: map['telepon'] as String,
-      foto: map['foto'] as String,
+      telepon: map['no_telp'] as String,
+      foto: map['pic'] as String,
     );
   }
 
@@ -57,7 +57,7 @@ class Kontak {
 
   @override
   String toString() {
-    return 'Kontak(nama: $nama, email: $email, alamat: $alamat, telepon: $telepon, foto: $foto)';
+    return 'Kontak(nama: $nama, email: $email, alamat: $alamat, no_telp: $telepon, pic: $foto)';
   }
 
   @override

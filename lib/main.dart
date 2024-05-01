@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            title: Center(child: Text("Data Kontak")),
+            title: const Center(child: Text("Data Kontak")),
           ),
           body: const HomeView(),
         ));
